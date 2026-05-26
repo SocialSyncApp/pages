@@ -9,4 +9,4 @@ Disallow: /_layouts/
 Disallow: /_includes/
 
 # Indiquer l'emplacement du sitemap
-Sitemap: https://ginelog.github.io/relay-legal-site/sitemap.xml
+Sitemap: https://socialsyncapp.github.io/pages/sitemap.xml
