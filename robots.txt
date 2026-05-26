@@ -1,0 +1,12 @@
+# Relay Legal Site - robots.txt
+User-agent: *
+Allow: /
+
+# Empêcher le crawling des fichiers système GitHub
+Disallow: /.git/
+Disallow: /_config.yml
+Disallow: /_layouts/
+Disallow: /_includes/
+
+# Indiquer l'emplacement du sitemap
+Sitemap: https://ginelog.github.io/relay-legal-site/sitemap.xml
