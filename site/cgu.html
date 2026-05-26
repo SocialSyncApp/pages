@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conditions Générales d'Utilisation — Relay</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f5f3ef;
+    --accent: #0B2545;
+    --accent-light: #1E4D8C;
+    --rule: #d4cfc6;
+    --muted: #5a5450;
+    --highlight: #e8f0f8;
+    --stamp: #c8402a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  header {
+    background: var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo img {
+    height: 28px;
+    width: auto;
+  }
+
+  nav a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: #fff; }
+  nav a.active { color: #38BDF8; }
+
+  .doc-hero {
+    background: var(--accent);
+    color: #fff;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doc-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(56,189,248,0.1) 0%, transparent 70%);
+  }
+
+  .doc-hero .doc-type {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #38BDF8;
+    margin-bottom: 1rem;
+  }
+
+  .doc-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+
+  .doc-hero .meta {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .doc-hero .meta span::before { content: '— '; opacity: 0.5; }
+
+  .page-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .toc {
+    position: sticky;
+    top: 76px;
+    font-size: 0.82rem;
+    padding-right: 1rem;
+    border-right: 1px solid var(--rule);
+  }
+
+  .toc-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .toc ol { list-style: none; counter-reset: toc; }
+  .toc li { counter-increment: toc; margin-bottom: 0.25rem; }
+
+  .toc a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+
+  .toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    color: var(--accent-light);
+    opacity: 0.6;
+    min-width: 20px;
+    flex-shrink: 0;
+  }
+
+  .toc a:hover { background: var(--highlight); color: var(--accent); }
+
+  .doc-content section { margin-bottom: 4rem; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1.5px solid var(--rule);
+  }
+
+  .section-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    letter-spacing: 0.08em;
+    min-width: 28px;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 2rem 0 0.75rem;
+  }
+
+  p { margin-bottom: 1rem; font-size: 0.95rem; color: #2a2a2a; }
+  ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.5rem; font-size: 0.95rem; color: #2a2a2a; }
+
+  .callout {
+    border-left: 3px solid var(--accent-light);
+    background: var(--highlight);
+    padding: 1rem 1.25rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1.25rem 0;
+    font-size: 0.9rem;
+  }
+
+  .callout.important {
+    border-left-color: var(--stamp);
+    background: #fdf2f0;
+  }
+
+  .callout strong { color: var(--accent); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 1.25rem 0;
+  }
+
+  th {
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    color: #2a2a2a;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.25rem 0;
+  }
+
+  .plan-card {
+    border: 1.5px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.25rem;
+    background: #fff;
+  }
+
+  .plan-card.featured {
+    border-color: var(--accent-light);
+    background: var(--highlight);
+  }
+
+  .plan-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .plan-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .plan-price small {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .plan-features {
+    list-style: none;
+    padding: 0;
+    font-size: 0.82rem;
+  }
+
+  .plan-features li {
+    padding: 0.2rem 0;
+    color: var(--muted);
+  }
+
+  .plan-features li::before {
+    content: '✓ ';
+    color: var(--accent-light);
+    font-weight: 700;
+  }
+
+  .signature-block {
+    border: 1.5px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .sig-item { font-size: 0.85rem; color: var(--muted); }
+
+  .sig-item strong {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-box {
+    background: var(--accent);
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .contact-box a { color: #fff; }
+
+  .contact-box p { color: #fff; }
+
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.65);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+  }
+
+  footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
+  footer a:hover { color: #fff; }
+
+  @media (max-width: 700px) {
+    .page-wrap { grid-template-columns: 1fr; }
+    .toc { display: none; }
+    .plan-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo"><img src="../assets/Relay-full.png" alt="Relay" style="width: 100px; height: 60px;"></a>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="cgu.html" class="active">CGU</a>
+    </nav>
+  </div>
+</header>
+
+<div class="doc-hero">
+  <p class="doc-type">Document légal</p>
+  <h1>Conditions Générales d'Utilisation</h1>
+  <div class="meta">
+    <span>Version 1.0</span>
+    <span>Mai 2026</span>
+    <span>Application Relay — Windows Desktop</span>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <aside class="toc">
+    <p class="toc-title">Sommaire</p>
+    <ol>
+      <li><a href="#c1">Éditeur & définitions</a></li>
+      <li><a href="#c2">Acceptation des CGU</a></li>
+      <li><a href="#c3">Description du service</a></li>
+      <li><a href="#c4">Plans & licences</a></li>
+      <li><a href="#c5">Paiement & remboursement</a></li>
+      <li><a href="#c6">Conditions d'utilisation</a></li>
+      <li><a href="#c7">Module IA</a></li>
+      <li><a href="#c8">APIs tierces</a></li>
+      <li><a href="#c9">Propriété intellectuelle</a></li>
+      <li><a href="#c10">Responsabilité</a></li>
+      <li><a href="#c11">Disponibilité & mises à jour</a></li>
+      <li><a href="#c12">Résiliation</a></li>
+      <li><a href="#c13">Données personnelles</a></li>
+      <li><a href="#c14">Droit applicable</a></li>
+      <li><a href="#c15">Contact</a></li>
+    </ol>
+  </aside>
+
+  <main class="doc-content">
+
+    <div class="callout important">
+      <strong>Important :</strong> Veuillez lire attentivement les présentes Conditions Générales d'Utilisation avant d'installer ou d'utiliser l'application Relay. En téléchargeant, installant ou utilisant Relay, vous acceptez d'être lié(e) par ces conditions. Si vous n'acceptez pas ces conditions, n'installez pas l'application.
+    </div>
+
+    <!-- 1 -->
+    <section id="c1">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2>Éditeur et définitions</h2>
+      </div>
+
+      <h3>1.1 Éditeur</h3>
+      <table>
+        <tr><td><strong>Nom</strong></td><td>Relay</td></tr>
+        <tr><td><strong>Pays</strong></td><td>Togo</td></tr>
+        <tr><td><strong>E-mail</strong></td><td>ginlogossou@gmail.com</td></tr>
+      </table>
+
+      <h3>1.2 Définitions</h3>
+      <ul>
+        <li><strong>« Application » ou « Relay »</strong> : le logiciel desktop Windows de gestion des réseaux sociaux édité par l'Éditeur.</li>
+        <li><strong>« Utilisateur »</strong> : toute personne physique ou morale qui télécharge, installe ou utilise l'Application.</li>
+        <li><strong>« Licence »</strong> : droit d'utilisation de l'Application accordé à l'Utilisateur selon le plan souscrit.</li>
+        <li><strong>« Plan Gratuit »</strong> : version de l'Application sans paiement, avec fonctionnalités limitées.</li>
+        <li><strong>« Plan Pro »</strong> : licence perpétuelle à achat unique avec fonctionnalités avancées.</li>
+        <li><strong>« Plan Premium »</strong> : abonnement mensuel ou annuel incluant le module IA et toutes les fonctionnalités.</li>
+        <li><strong>« Module IA »</strong> : fonctionnalités d'intelligence artificielle accessibles exclusivement aux abonnés Premium.</li>
+        <li><strong>« Plateformes tierces »</strong> : services externes intégrés (Meta, LinkedIn, X, TikTok).</li>
+        <li><strong>« Données locales »</strong> : données stockées exclusivement sur l'appareil de l'Utilisateur.</li>
+        <li><strong>« Backend Relay »</strong> : infrastructure serveur de l'Éditeur gérant les licences et le module IA.</li>
+      </ul>
+    </section>
+
+    <!-- 2 -->
+    <section id="c2">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2>Acceptation des présentes CGU</h2>
+      </div>
+      <p>L'utilisation de l'Application implique l'acceptation pleine et entière des présentes CGU. Ces conditions constituent un contrat entre l'Utilisateur et l'Éditeur.</p>
+      <p>L'Utilisateur reconnaît avoir pris connaissance des présentes CGU lors de :</p>
+      <ul>
+        <li>La première installation de l'Application (case à cocher obligatoire à l'onboarding)</li>
+        <li>L'activation d'une licence Pro ou Premium</li>
+        <li>Tout accès ultérieur à l'Application</li>
+      </ul>
+      <p>L'Utilisateur doit être âgé d'au moins <strong>16 ans</strong> pour utiliser l'Application. Pour les mineurs, l'accord du représentant légal est requis.</p>
+      <p>Si l'Utilisateur utilise l'Application dans le cadre d'une activité professionnelle, il garantit disposer de l'autorité nécessaire pour accepter ces CGU au nom de son organisation.</p>
+    </section>
+
+    <!-- 3 -->
+    <section id="c3">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>Description du service</h2>
+      </div>
+      <p>Relay est une <strong>application desktop native Windows</strong> (Windows 10/11, 64-bit) permettant de :</p>
+      <ul>
+        <li>Créer, rédiger et mettre en forme des publications pour les réseaux sociaux</li>
+        <li>Planifier et automatiser la publication sur Meta (Facebook/Instagram), LinkedIn, X (Twitter) et TikTok</li>
+        <li>Gérer plusieurs comptes sociaux depuis une interface unifiée</li>
+        <li>Consulter les statistiques de performance agrégées</li>
+        <li>Générer du contenu assisté par intelligence artificielle (Plan Premium uniquement)</li>
+      </ul>
+      <p>Relay est une application à <strong>stockage local</strong> : vos posts, médias et tokens OAuth résident exclusivement sur votre appareil. Une connexion Internet est requise pour la publication, la synchronisation des statistiques et l'utilisation du Module IA.</p>
+
+      <h3>3.1 Configuration minimale requise</h3>
+      <ul>
+        <li>Windows 10 64-bit (version 1903+) ou Windows 11</li>
+        <li>Processeur : Intel Core i3 / AMD Ryzen 3 — 2 GHz minimum</li>
+        <li>RAM : 4 Go minimum (8 Go recommandés)</li>
+        <li>Espace disque : 200 Mo + espace pour le cache médias</li>
+        <li>Résolution : 1 280 × 720 minimum</li>
+        <li>Connexion Internet pour les fonctionnalités en ligne</li>
+      </ul>
+    </section>
+
+    <!-- 4 -->
+    <section id="c4">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2>Plans, licences et fonctionnalités</h2>
+      </div>
+
+      <div class="plan-grid">
+        <div class="plan-card">
+          <p class="plan-name">Gratuit</p>
+          <p class="plan-price">0 FCFA <small>/ toujours</small></p>
+          <ul class="plan-features">
+            <li>2 comptes connectés</li>
+            <li>10 posts / mois</li>
+            <li>Planification incluse</li>
+            <li>Prévisualisation multi-plateforme</li>
+            <li>Bibliothèque médias 50 Mo</li>
+          </ul>
+        </div>
+        <div class="plan-card featured">
+          <p class="plan-name">Pro — Licence</p>
+          <p class="plan-price"><em>Coming soon</em></p>
+          <ul class="plan-features">
+            <li>Comptes illimités</li>
+            <li>Posts illimités</li>
+            <li>Analytics basiques</li>
+            <li>Export PDF/CSV</li>
+            <li>Bibliothèque médias 5 Go</li>
+            <li>Mises à jour majeures 2 ans</li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <p class="plan-name">Premium — Abonnement</p>
+          <p class="plan-price"><em>Coming soon</em></p>
+          <ul class="plan-features">
+            <li>Tout le plan Pro</li>
+            <li>Module IA complet</li>
+            <li>Suggestions horaires IA</li>
+            <li>Analytics avancés</li>
+            <li>Support prioritaire</li>
+            <li>Toujours à jour</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>4.1 Licence Plan Gratuit</h3>
+      <p>La version gratuite est accordée à titre non exclusif, non transférable, révocable. L'Éditeur se réserve le droit de modifier les fonctionnalités du Plan Gratuit avec un préavis de 30 jours.</p>
+
+      <h3>4.2 Licence Plan Pro (achat unique)</h3>
+      <p>L'achat d'une licence Pro confère à l'Utilisateur un droit d'utilisation perpétuel de la version acquise, incluant les mises à jour majeures pendant <strong>2 ans</strong> à compter de la date d'achat. Une licence Pro est valable pour <strong>un (1) appareil</strong> simultanément. En cas de changement d'appareil, l'Utilisateur peut transférer sa licence via le processus de désactivation disponible dans les paramètres.</p>
+
+      <h3>4.3 Abonnement Plan Premium</h3>
+      <p>L'abonnement Premium est souscrit pour une durée déterminée (mensuelle ou annuelle) et se renouvelle automatiquement sauf résiliation par l'Utilisateur avant la date de renouvellement. L'accès au Module IA est conditionné au maintien de l'abonnement actif.</p>
+
+      <h3>4.4 Validation de la licence</h3>
+      <p>À l'activation, l'Application procède à une vérification en ligne auprès du backend Relay. En cas d'absence de connexion, un <strong>mode hors-ligne de 30 jours</strong> est accordé. Au-delà, les fonctionnalités Pro/Premium sont temporairement suspendues jusqu'à reconnexion et validation.</p>
+    </section>
+
+    <!-- 5 -->
+    <section id="c5">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2>Paiement et politique de remboursement</h2>
+      </div>
+
+      <h3>5.1 Tarification</h3>
+      <p>Les prix sont indiqués en FCFA toutes taxes comprises (TTC) applicables. L'Éditeur se réserve le droit de modifier ses tarifs à tout moment, avec une notification préalable de 30 jours pour les abonnés Premium existants.</p>
+
+      <h3>5.2 Modalités de paiement</h3>
+      <p>Les paiements sont traités par un prestataire tiers certifié PCI-DSS (ex. Stripe, Paddle). L'Éditeur ne stocke aucune donnée bancaire. Les moyens de paiement acceptés sont indiqués lors de la commande.</p>
+
+      <h3>5.3 Politique de remboursement</h3>
+      <table>
+        <thead>
+          <tr><th>Plan</th><th>Droit de rétractation / Remboursement</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Plan Pro (achat unique)</strong></td>
+            <td>Vous pouvez demander un remboursement dans les 14 jours suivant l'achat, à condition que le téléchargement du logiciel n'ait pas encore été activé. Après activation, aucun remboursement.</td>
+          </tr>
+          <tr>
+            <td><strong>Plan Premium (abonnement mensuel)</strong></td>
+            <td>14 jours de rétractation sur le premier paiement. Les périodes déjà facturées et entamées ne sont pas remboursables. La résiliation prend effet à la fin de la période en cours.</td>
+          </tr>
+          <tr>
+            <td><strong>Plan Premium (abonnement annuel)</strong></td>
+            <td>14 jours de rétractation sur le premier paiement. Remboursement au prorata des mois restants en cas de défaillance grave imputable à l'Éditeur.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Note :</strong> Pour les logiciels numériques téléchargés, le droit de rétractation peut être perdu dès le début de l'exécution si vous avez expressément renoncé à ce droit lors de la commande.
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section id="c6">
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <h2>Conditions et restrictions d'utilisation</h2>
+      </div>
+
+      <h3>6.1 Usages autorisés</h3>
+      <p>L'Utilisateur est autorisé à utiliser Relay pour :</p>
+      <ul>
+        <li>Gérer ses propres comptes de réseaux sociaux ou ceux de ses clients (dans un cadre professionnel)</li>
+        <li>Créer, planifier et publier des contenus légaux sur les plateformes intégrées</li>
+        <li>Utiliser les fonctionnalités IA pour la création de contenus licites</li>
+      </ul>
+
+      <h3>6.2 Usages interdits</h3>
+      <p>Il est strictement interdit d'utiliser Relay pour :</p>
+      <ul>
+        <li>Publier des contenus illicites, diffamatoires, injurieux, haineux ou portant atteinte aux droits des tiers</li>
+        <li>Mener des activités de spam, phishing ou toute forme de communication non sollicitée à grande échelle</li>
+        <li>Violer les conditions d'utilisation des plateformes sociales intégrées (Meta, LinkedIn, X, TikTok)</li>
+        <li>Contourner les mécanismes de validation de licence ou partager une licence entre plusieurs utilisateurs non autorisés</li>
+        <li>Procéder à de la rétro-ingénierie (reverse engineering), désassembler ou modifier le logiciel</li>
+        <li>Utiliser l'Application à des fins de manipulation politique, de désinformation ou de propagande</li>
+        <li>Automatiser des comportements violant les politiques des APIs tierces</li>
+      </ul>
+
+      <h3>6.3 Responsabilité des contenus publiés</h3>
+      <p>L'Utilisateur est seul responsable des contenus qu'il crée, programme ou publie via Relay. L'Éditeur n'exerce aucun contrôle éditorial sur les publications effectuées et ne pourra être tenu responsable de leur contenu.</p>
+    </section>
+
+    <!-- 7 -->
+    <section id="c7">
+      <div class="section-header">
+        <span class="section-number">07</span>
+        <h2>Module Intelligence Artificielle (Premium)</h2>
+      </div>
+      <p>Le Module IA de Relay est alimenté par des modèles de langage tiers (Claude d'Anthropic ou GPT-4o d'OpenAI). Son utilisation est soumise aux conditions supplémentaires suivantes :</p>
+
+      <h3>7.1 Fonctionnement</h3>
+      <p>Les requêtes IA sont routées via le backend sécurisé Relay avant transmission au prestataire LLM. Cela garantit que les clés API des fournisseurs ne sont jamais exposées côté client.</p>
+
+      <h3>7.2 Quota d'utilisation</h3>
+      <p>Un quota mensuel de requêtes IA est associé au Plan Premium. Ce quota est communiqué dans les paramètres de l'Application et sur la page tarifaire. En cas de dépassement, les requêtes supplémentaires peuvent être facturées ou bloquées jusqu'au renouvellement mensuel.</p>
+
+      <h3>7.3 Qualité et exactitude</h3>
+      <p>Les contenus générés par le Module IA sont fournis à titre de suggestions. L'Utilisateur demeure seul responsable de leur vérification, modification et publication. L'Éditeur ne garantit pas l'exactitude, la pertinence ou l'adéquation des contenus générés.</p>
+
+      <h3>7.4 Propriété des contenus générés</h3>
+      <p>Les contenus générés par le Module IA à partir des requêtes de l'Utilisateur appartiennent à l'Utilisateur. L'Éditeur ne revendique aucun droit sur ces contenus. L'Utilisateur est invité à vérifier les droits liés aux contenus générés par IA selon sa juridiction.</p>
+
+      <h3>7.5 Restrictions du Module IA</h3>
+      <p>Il est interdit d'utiliser le Module IA pour générer des contenus :</p>
+      <ul>
+        <li>À caractère haineux, discriminatoire ou incitant à la violence</li>
+        <li>Sexuellement explicites ou portant atteinte à la dignité humaine</li>
+        <li>Constituant de la désinformation délibérée</li>
+        <li>Violant les droits de propriété intellectuelle de tiers</li>
+      </ul>
+    </section>
+
+    <!-- 8 -->
+    <section id="c8">
+      <div class="section-header">
+        <span class="section-number">08</span>
+        <h2>Intégrations et APIs de plateformes tierces</h2>
+      </div>
+      <p>Relay s'intègre avec Meta (Facebook/Instagram), LinkedIn, X (Twitter) et TikTok via leurs APIs officielles. L'utilisation de ces intégrations est soumise aux conditions d'utilisation de chaque plateforme, que l'Utilisateur est tenu de respecter.</p>
+
+      <h3>8.1 Responsabilité des intégrations</h3>
+      <p>L'Éditeur n'est pas responsable des modifications, restrictions ou interruptions apportées par les plateformes tierces à leurs APIs. En cas de changement affectant une intégration, l'Éditeur s'engage à informer les utilisateurs et à déployer les correctifs nécessaires dans un délai raisonnable.</p>
+
+      <h3>8.2 Coûts d'accès API</h3>
+      <p>Certaines plateformes facturent l'accès à leurs APIs (notamment X/Twitter). Ces coûts sont intégrés dans la tarification de Relay. Si les coûts d'API subissaient une hausse significative et imprévue, l'Éditeur se réserve le droit d'ajuster sa tarification avec un préavis de 30 jours.</p>
+
+      <h3>8.3 Tokens OAuth</h3>
+      <p>Les tokens d'authentification OAuth sont stockés exclusivement sur l'appareil de l'Utilisateur, chiffrés via Windows DPAPI. En cas d'expiration ou de révocation d'un token, l'Utilisateur devra réauthentifier son compte concerné.</p>
+    </section>
+
+    <!-- 9 -->
+    <section id="c9">
+      <div class="section-header">
+        <span class="section-number">09</span>
+        <h2>Propriété intellectuelle</h2>
+      </div>
+
+      <h3>9.1 Droits de l'Éditeur</h3>
+      <p>L'Application Relay, son code source, son interface graphique, sa documentation et ses éléments de marque (nom, logo, charte graphique) sont la propriété exclusive de l'Éditeur et protégés par les lois sur la propriété intellectuelle.</p>
+      <p>La licence accordée à l'Utilisateur n'emporte aucun transfert de propriété intellectuelle sur ces éléments.</p>
+
+      <h3>9.2 Droits de l'Utilisateur</h3>
+      <p>L'Utilisateur conserve l'intégralité des droits sur les contenus qu'il crée via l'Application (textes, images, vidéos). L'Utilisateur accorde à l'Éditeur une licence limitée et non-exclusive d'utilisation de ses contenus dans le seul but de fournir le service (notamment le routage des requêtes IA).</p>
+
+      <h3>9.3 Marques tierces</h3>
+      <p>Les noms Meta, Facebook, Instagram, LinkedIn, X (Twitter), TikTok et leurs logos respectifs sont des marques déposées de leurs propriétaires respectifs. Leur mention dans ces CGU et dans l'Application n'implique aucun partenariat ou affiliation officielle avec ces entreprises.</p>
+    </section>
+
+    <!-- 10 -->
+    <section id="c10">
+      <div class="section-header">
+        <span class="section-number">10</span>
+        <h2>Limitation de responsabilité</h2>
+      </div>
+
+      <div class="callout important">
+        <strong>Clause importante :</strong> Dans la limite autorisée par la législation applicable, la responsabilité de l'Éditeur est limitée aux dommages directs et ne peut excéder le montant versé par l'Utilisateur au cours des 12 derniers mois.
+      </div>
+
+      <h3>10.1 Exclusions de responsabilité</h3>
+      <p>L'Éditeur ne peut être tenu responsable :</p>
+      <ul>
+        <li>Des pertes de données résultant d'une défaillance matérielle de l'appareil de l'Utilisateur</li>
+        <li>Des modifications ou interruptions des APIs des plateformes sociales tierces</li>
+        <li>Du contenu des publications effectuées par l'Utilisateur</li>
+        <li>Des sanctions ou restrictions imposées par les plateformes tierces à l'Utilisateur</li>
+        <li>Des pertes commerciales indirectes liées à une indisponibilité temporaire du service</li>
+        <li>De l'exactitude des contenus générés par le Module IA</li>
+      </ul>
+
+      <h3>10.2 Force majeure</h3>
+      <p>L'Éditeur ne saurait être tenu responsable d'une inexécution ou d'un retard dans l'exécution de ses obligations dû à un cas de force majeure (catastrophe naturelle, cyberattaque de grande ampleur, modification législative imprévue, etc.).</p>
+
+      <h3>10.3 Sauvegardes</h3>
+      <p>L'Utilisateur est responsable de la sauvegarde de ses données locales. Il est recommandé d'effectuer des sauvegardes régulières du répertoire <code>%AppData%\Roaming\Relay</code>.</p>
+    </section>
+
+    <!-- 11 -->
+    <section id="c11">
+      <div class="section-header">
+        <span class="section-number">11</span>
+        <h2>Disponibilité du service et mises à jour</h2>
+      </div>
+
+      <h3>11.1 Disponibilité</h3>
+      <p>L'Application fonctionnant principalement en local, sa disponibilité ne dépend pas d'une infrastructure serveur permanente pour les fonctionnalités de base (rédaction, planification locale). Les fonctionnalités nécessitant une connexion Internet (publication, analytics, module IA, validation de licence) peuvent être temporairement indisponibles en cas de maintenance.</p>
+      <p>L'Éditeur s'engage à maintenir une disponibilité des services cloud de <strong>99 % sur une base mensuelle</strong>, hors maintenances planifiées communiquées avec un préavis de 24 heures.</p>
+
+      <h3>11.2 Mises à jour</h3>
+      <ul>
+        <li><strong>Plan Gratuit :</strong> mises à jour de sécurité uniquement pendant 1 an, puis l'Utilisateur sera invité à mettre à niveau.</li>
+        <li><strong>Plan Pro :</strong> toutes les mises à jour majeures pendant 2 ans à compter de la date d'achat. Les correctifs de sécurité sont fournis indéfiniment.</li>
+        <li><strong>Plan Premium :</strong> accès à toutes les mises à jour (majeures, mineures, correctifs) tant que l'abonnement est actif.</li>
+      </ul>
+      <p>L'Éditeur se réserve le droit de modifier les fonctionnalités de l'Application via des mises à jour. Les modifications substantielles seront communiquées préalablement.</p>
+    </section>
+
+    <!-- 12 -->
+    <section id="c12">
+      <div class="section-header">
+        <span class="section-number">12</span>
+        <h2>Résiliation</h2>
+      </div>
+
+      <h3>12.1 Résiliation par l'Utilisateur</h3>
+      <p>L'Utilisateur peut résilier son abonnement Premium à tout moment depuis son espace client ou en contactant le support. La résiliation prend effet à la fin de la période en cours payée. La désinstallation de l'Application n'entraîne pas automatiquement la résiliation d'un abonnement actif.</p>
+
+      <h3>12.2 Résiliation par l'Éditeur</h3>
+      <p>L'Éditeur peut résilier ou suspendre l'accès de l'Utilisateur en cas de :</p>
+      <ul>
+        <li>Violation des présentes CGU</li>
+        <li>Usage frauduleux de licence</li>
+        <li>Non-paiement des sommes dues après mise en demeure</li>
+        <li>Comportement préjudiciable pour l'Éditeur ou d'autres utilisateurs</li>
+      </ul>
+      <p>En cas de résiliation pour faute de l'Utilisateur, aucun remboursement ne sera accordé.</p>
+
+      <h3>12.3 Effets de la résiliation</h3>
+      <p>À la résiliation, l'accès aux fonctionnalités payantes est désactivé. Les données locales (posts, médias) restent accessibles sur l'appareil de l'Utilisateur, qui peut les exporter depuis <strong>Paramètres → Gestion des données</strong> avant désinstallation.</p>
+    </section>
+
+    <!-- 13 -->
+    <section id="c13">
+      <div class="section-header">
+        <span class="section-number">13</span>
+        <h2>Protection des données personnelles</h2>
+      </div>
+      <p>La collecte et le traitement des données personnelles dans le cadre de l'utilisation de Relay sont décrits dans notre <a href="confidentialite.html" style="color: var(--accent-light); font-weight: 600;">Politique de Confidentialité</a>, qui fait partie intégrante des présentes CGU.</p>
+      <p>Points clés à retenir :</p>
+      <ul>
+        <li>Vos données de contenu (posts, médias, tokens) sont exclusivement stockées sur votre appareil local.</li>
+        <li>Relay ne collecte que les données strictement nécessaires à la gestion de votre licence et au fonctionnement du Module IA.</li>
+        <li>Aucun tracker analytique n'est intégré sans votre consentement explicite.</li>
+        <li>Vous disposez d'un droit d'accès, de rectification, d'effacement et de portabilité de vos données.</li>
+      </ul>
+    </section>
+
+    <!-- 14 -->
+    <section id="c14">
+      <div class="section-header">
+        <span class="section-number">14</span>
+        <h2>Droit applicable et règlement des litiges</h2>
+      </div>
+
+      <h3>14.1 Droit applicable</h3>
+      <p>Les présentes CGU sont soumises au droit togolais. En cas de conflit entre les versions linguistiques, la version française prévaut.</p>
+
+      <h3>14.2 Médiation</h3>
+      <p>En cas de litige, l'Utilisateur est invité à contacter en premier lieu le service client de l'Éditeur à <a href="mailto:ginlogossou@gmail.com">ginlogossou@gmail.com</a>. À défaut de résolution amiable dans un délai de 30 jours, les parties pourront recourir à une procédure de médiation conventionnelle ou aux tribunaux compétents.</p>
+
+      <h3>14.3 Juridiction compétente</h3>
+      <p>À défaut de résolution amiable, tout litige sera soumis aux tribunaux compétents du ressort du siège de l'Éditeur, sauf disposition légale contraire applicable aux consommateurs.</p>
+    </section>
+
+    <!-- 15 -->
+    <section id="c15">
+      <div class="section-header">
+        <span class="section-number">15</span>
+        <h2>Contact et service client</h2>
+      </div>
+      <div class="contact-box">
+        <p><strong>Pour toute question relative aux présentes CGU ou à votre licence :</strong></p>
+        <p>📧 Support : <a href="mailto:ginlogossou@gmail.com">ginlogossou@gmail.com</a></p>
+        <p>📧 Confidentialité : <a href="mailto:ginlogossou@gmail.com">ginlogossou@gmail.com</a></p>
+        <p style="margin-top:0.75rem; font-size:0.82rem; opacity:0.7;">
+          Plan Pro : réponse sous <strong>3 jours ouvrés</strong> par e-mail.<br>
+          Plan Premium : réponse sous <strong>24 heures</strong> par e-mail.
+        </p>
+      </div>
+    </section>
+
+    <div class="signature-block">
+      <div class="sig-item">
+        <strong>Document</strong>
+        CGU — Relay v1.0
+      </div>
+      <div class="sig-item">
+        <strong>Version</strong>
+        1.0 — Initial
+      </div>
+      <div class="sig-item">
+        <strong>Date d'entrée en vigueur</strong>
+        Mai 2026
+      </div>
+      <div class="sig-item">
+        <strong>Dernière mise à jour</strong>
+        Mai 2026
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <p>&copy; 2026 Relay — Application de gestion des réseaux sociaux &nbsp;·&nbsp;
+  <a href="confidentialite.html">Confidentialité</a> &nbsp;·&nbsp;
+  <a href="cgu.html">CGU</a> &nbsp;·&nbsp;
+  <a href="index.html">Accueil</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relay — Gestion locale des réseaux sociaux</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f5f3ef;
+    --accent: #0B1121;
+    --accent-light: #1E3A5F;
+    --rule: #d4cfc6;
+    --muted: #5a5450;
+    --highlight: #e0f2fe;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--accent);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11,17,33,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo img {
+    height: 28px;
+    width: auto;
+  }
+
+  nav a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: #fff; }
+
+  /* HERO */
+  .hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(56,189,248,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(30,58,95,0.3) 0%, transparent 50%);
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 680px;
+  }
+
+  .eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #38BDF8;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: #38BDF8;
+    opacity: 0.5;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: #38BDF8;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(56,189,248,0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .card:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(56,189,248,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(56,189,248,0.15);
+    border: 1px solid rgba(56,189,248,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-tag {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #38BDF8;
+    margin-bottom: 0.4rem;
+  }
+
+  .card h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .topic-tag {
+    font-size: 0.72rem;
+    background: rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .card-arrow {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.1rem;
+    opacity: 0.3;
+    transition: all 0.25s;
+  }
+
+  .card:hover .card-arrow {
+    opacity: 0.8;
+    transform: translateX(3px);
+  }
+
+  /* NOTICE */
+  .legal-notice {
+    background: var(--paper);
+    color: var(--ink);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .legal-notice-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .legal-notice h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-notice p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .legal-notice strong { color: var(--accent); }
+
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.65);
+    text-align: center;
+    padding: 1.75rem 2rem;
+    font-size: 0.8rem;
+  }
+
+  footer a { color: rgba(255,255,255,0.8); text-decoration: none; }
+  footer a:hover { color: #38BDF8; }
+
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo"><img src="../assets/Relay-full.png" alt="Relay" style="width: 100px; height: 60px;"></a>
+    <nav>
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="cgu.html">CGU</a>
+    </nav>
+  </div>
+</header>
+
+<main class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Documents légaux</div>
+    <h1>Transparence &amp;<br><em>confiance</em></h1>
+    <p class="hero-desc">
+      Relay est conçu selon une philosophie <em>privacy-by-design</em>. Vos données restent sur votre appareil. Consultez nos engagements légaux ci-dessous.
+    </p>
+
+    <div class="cards">
+      <a href="confidentialite.html" class="card">
+        <h2>Politique de Confidentialité</h2>
+        <p>Comment vos données sont collectées, traitées et protégées. Vos droits relatifs à vos données personnelles expliqués clairement.</p>
+        <div class="card-topics">
+          <span class="topic-tag">Données locales</span>
+          <span class="topic-tag">Module IA</span>
+          <span class="topic-tag">Vos droits</span>
+          <span class="topic-tag">Sécurité</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </a>
+
+      <a href="cgu.html" class="card">
+        <h2>Conditions Générales d'Utilisation</h2>
+        <p>Les règles d'utilisation de Relay, les plans et licences, la politique de remboursement et vos garanties.</p>
+        <div class="card-topics">
+          <span class="topic-tag">Licences</span>
+          <span class="topic-tag">Plans tarifaires</span>
+          <span class="topic-tag">Remboursement</span>
+          <span class="topic-tag">Responsabilité</span>
+        </div>
+        <span class="card-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 Relay — Application de gestion des réseaux sociaux &nbsp;·&nbsp;
+  <a href="confidentialite.html">Politique de Confidentialité</a> &nbsp;·&nbsp;
+  <a href="cgu.html">CGU</a></p>
+</footer>
+
+</body>
+</html>

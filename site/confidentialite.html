@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politique de Confidentialité — Relay</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f5f3ef;
+    --accent: #0B2545;
+    --accent-light: #1E4D8C;
+    --rule: #d4cfc6;
+    --muted: #5a5450;
+    --highlight: #e8f0f8;
+    --stamp: #c8402a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--accent);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo img {
+    height: 28px;
+    width: auto;
+  }
+
+  nav a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: #fff; }
+  nav a.active { color: #38BDF8; }
+
+  /* HERO */
+  .doc-hero {
+    background: var(--accent);
+    color: #fff;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doc-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(56,189,248,0.12) 0%, transparent 70%);
+  }
+
+  .doc-hero .doc-type {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #38BDF8;
+    margin-bottom: 1rem;
+  }
+
+  .doc-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+
+  .doc-hero .meta {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .doc-hero .meta span::before {
+    content: '— ';
+    opacity: 0.5;
+  }
+
+  /* LAYOUT */
+  .page-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 4rem;
+    align-items: start;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+  }
+
+  /* TOC SIDEBAR */
+  .toc {
+    position: sticky;
+    top: 76px;
+    font-size: 0.82rem;
+    padding-right: 1rem;
+    border-right: 1px solid var(--rule);
+  }
+
+  .toc-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+  }
+
+  .toc li {
+    counter-increment: toc;
+    margin-bottom: 0.25rem;
+  }
+
+  .toc a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+
+  .toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    color: var(--accent-light);
+    opacity: 0.6;
+    min-width: 20px;
+    flex-shrink: 0;
+  }
+
+  .toc a:hover {
+    background: var(--highlight);
+    color: var(--accent);
+  }
+
+  /* CONTENT */
+  .doc-content section {
+    margin-bottom: 4rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1.5px solid var(--rule);
+  }
+
+  .section-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    letter-spacing: 0.08em;
+    min-width: 28px;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 2rem 0 0.75rem;
+  }
+
+  p { margin-bottom: 1rem; font-size: 0.95rem; color: #2a2a2a; }
+
+  ul, ol {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  li { margin-bottom: 0.5rem; font-size: 0.95rem; color: #2a2a2a; }
+
+  /* CALLOUT BOXES */
+  .callout {
+    border-left: 3px solid var(--accent-light);
+    background: var(--highlight);
+    padding: 1rem 1.25rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1.25rem 0;
+    font-size: 0.9rem;
+  }
+
+  .callout.important {
+    border-left-color: var(--stamp);
+    background: #fdf2f0;
+  }
+
+  .callout strong { color: var(--accent); }
+
+  /* DATA TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 1.25rem 0;
+  }
+
+  th {
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    color: #2a2a2a;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+
+  /* SIGNATURE BLOCK */
+  .signature-block {
+    border: 1.5px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .sig-item {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .sig-item strong {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 0.2rem;
+  }
+
+  /* CONTACT BLOCK */
+  .contact-box {
+    background: var(--accent);
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .contact-box a { color: #fff; }
+
+  .contact-box p { color: #fff; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.65);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+  }
+
+  footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
+  footer a:hover { color: #fff; }
+
+  @media (max-width: 700px) {
+    .page-wrap { grid-template-columns: 1fr; }
+    .toc { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo"><img src="../assets/Relay-full.png" alt="Relay" style="width: 100px; height: 60px;"></a>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="politique-confidentialite.html" class="active">Confidentialité</a>
+      <a href="cgu.html">CGU</a>
+    </nav>
+  </div>
+</header>
+
+<div class="doc-hero">
+  <p class="doc-type">Document légal</p>
+  <h1>Politique de Confidentialité</h1>
+  <div class="meta">
+    <span>Version 1.0</span>
+    <span>Mai 2026</span>
+    <span>Application Relay — Windows Desktop</span>
+  </div>
+</div>
+
+<div class="page-wrap">
+  <aside class="toc">
+    <p class="toc-title">Sommaire</p>
+    <ol>
+      <li><a href="#s1">Responsable du traitement</a></li>
+      <li><a href="#s2">Données collectées</a></li>
+      <li><a href="#s3">Finalités du traitement</a></li>
+      <li><a href="#s4">Base légale</a></li>
+      <li><a href="#s5">Stockage & sécurité</a></li>
+      <li><a href="#s6">Partage avec des tiers</a></li>
+      <li><a href="#s7">Transferts internationaux</a></li>
+      <li><a href="#s8">Durée de conservation</a></li>
+      <li><a href="#s9">Vos droits</a></li>
+      <li><a href="#s10">Cookies & traceurs</a></li>
+      <li><a href="#s11">Modifications</a></li>
+      <li><a href="#s12">Contact DPO</a></li>
+    </ol>
+  </aside>
+
+  <main class="doc-content">
+
+    <div class="callout important">
+      <strong>Principe fondamental :</strong> Relay est conçu selon une approche <em>privacy-by-design</em>. L'ensemble de vos données (posts, brouillons, médias, comptes sociaux) réside exclusivement sur votre poste local. Relay ne collecte que les informations strictement nécessaires à la gestion de votre licence et à la fourniture des fonctionnalités premium.
+    </div>
+
+    <!-- 1 -->
+    <section id="s1">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2>Responsable du traitement</h2>
+      </div>
+      <p>Le responsable du traitement des données personnelles collectées dans le cadre de l'utilisation de l'application <strong>Relay</strong> est :</p>
+      <table>
+        <tr><td><strong>Nom</strong></td><td>Relay</td></tr>
+        <tr><td><strong>Pays</strong></td><td>Togo</td></tr>
+        <tr><td><strong>E-mail de contact</strong></td><td>ginlogossou@gmail.com</td></tr>
+      </table>
+      <p class="callout"><strong>Note :</strong> Relay cible principalement le marché francophone. Les lois relatives à la protection des données personnelles de votre juridiction s'appliquent de manière complémentaire.</p>
+    </section>
+
+    <!-- 2 -->
+    <section id="s2">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2>Données collectées</h2>
+      </div>
+
+      <h3>2.1 Données traitées localement (non transmises à Relay)</h3>
+      <p>Les données suivantes sont exclusivement stockées sur votre appareil et ne sont jamais transmises à nos serveurs :</p>
+      <ul>
+        <li>Contenus de vos posts, brouillons et médias</li>
+        <li>Tokens d'authentification OAuth des plateformes sociales (stockés chiffrés via Windows DPAPI)</li>
+        <li>Données analytiques récupérées depuis les plateformes sociales</li>
+        <li>Paramètres et préférences de l'application</li>
+        <li>Base de données SQLite locale (posts planifiés, historique, médias)</li>
+      </ul>
+
+      <h3>2.2 Données transmises aux serveurs Relay</h3>
+      <table>
+        <thead>
+          <tr><th>Catégorie</th><th>Données</th><th>Finalité</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Gestion de licence</strong></td>
+            <td>Clé de licence, empreinte matérielle anonymisée (hardware fingerprint), date d'activation, version de l'application, système d'exploitation</td>
+            <td>Validation et activation de la licence Pro / Premium ; protection anti-fraude</td>
+          </tr>
+          <tr>
+            <td><strong>Module IA (Premium)</strong></td>
+            <td>Texte soumis pour génération ou reformulation (contenu de post), ton et plateformes cibles sélectionnés</td>
+            <td>Fourniture des fonctionnalités d'intelligence artificielle via l'API LLM tierce</td>
+          </tr>
+          <tr>
+            <td><strong>Support technique</strong></td>
+            <td>Adresse e-mail, description du problème, version de l'application, logs d'erreur anonymisés (si consentement)</td>
+            <td>Résolution des incidents et amélioration du service</td>
+          </tr>
+          <tr>
+            <td><strong>Mises à jour</strong></td>
+            <td>Version installée, système d'exploitation</td>
+            <td>Notification des nouvelles versions disponibles</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>2.3 Données que nous ne collectons pas</h3>
+      <ul>
+        <li>Mots de passe de comptes sociaux (authentification déléguée via OAuth 2.0 uniquement)</li>
+        <li>Contenu des messages privés sur les réseaux sociaux</li>
+        <li>Données de navigation ou comportement in-app (sauf consentement explicite à des fins de diagnostics)</li>
+        <li>Données bancaires (paiements traités par un prestataire tiers certifié PCI-DSS)</li>
+      </ul>
+    </section>
+
+    <!-- 3 -->
+    <section id="s3">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>Finalités du traitement</h2>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Finalité</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Exécution du contrat</strong></td><td>Activer et valider votre licence, fournir les fonctionnalités souscrites (Pro, Premium)</td></tr>
+          <tr><td><strong>Fourniture du module IA</strong></td><td>Router vos requêtes vers le LLM tiers (Claude API / OpenAI) via le backend sécurisé Relay</td></tr>
+          <tr><td><strong>Sécurité & anti-fraude</strong></td><td>Détecter les usages abusifs de licence, protéger l'intégrité du service</td></tr>
+          <tr><td><strong>Support</strong></td><td>Répondre à vos demandes d'assistance technique</td></tr>
+          <tr><td><strong>Améliorations produit</strong></td><td>Analyser les logs d'erreurs anonymisés pour identifier et corriger les bugs</td></tr>
+          <tr><td><strong>Communication</strong></td><td>Vous informer des mises à jour importantes et, avec votre consentement, des nouveautés</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 4 -->
+    <section id="s4">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2>Base légale du traitement</h2>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Traitement</th><th>Base légale</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Activation et validation de licence</td><td>Exécution du contrat</td></tr>
+          <tr><td>Module IA Premium</td><td>Exécution du contrat</td></tr>
+          <tr><td>Sécurité & anti-fraude</td><td>Intérêt légitime</td></tr>
+          <tr><td>Logs d'erreurs anonymisés</td><td>Intérêt légitime (amélioration du service)</td></tr>
+          <tr><td>Communications commerciales</td><td>Consentement</td></tr>
+          <tr><td>Obligations légales</td><td>Obligation légale</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 5 -->
+    <section id="s5">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2>Stockage et sécurité des données</h2>
+      </div>
+
+      <h3>5.1 Données locales (sur votre appareil)</h3>
+      <ul>
+        <li>Base de données SQLite stockée dans <code>%AppData%\Roaming\Relay</code></li>
+        <li>Tokens OAuth chiffrés via Windows DPAPI (Credential Manager), jamais en clair</li>
+        <li>Cache médias dans le répertoire AppData, taille configurable par l'utilisateur</li>
+      </ul>
+
+      <h3>5.2 Données côté serveur Relay</h3>
+      <ul>
+        <li>Serveurs hébergés sur infrastructure cloud sécurisée</li>
+        <li>Chiffrement au repos et en transit (TLS 1.2+ exclusivement)</li>
+        <li>Certificate pinning pour les communications entre l'application et le backend IA</li>
+        <li>Clés API tierces (LLM) stockées côté serveur uniquement, jamais exposées au client</li>
+        <li>Accès restreint aux personnels autorisés avec journalisation des accès</li>
+      </ul>
+
+      <h3>5.3 Mesures organisationnelles</h3>
+      <ul>
+        <li>Aucun contenu de post ou token OAuth n'est loggé côté serveur</li>
+        <li>Logs d'erreurs anonymisés — sans identifiant personnel</li>
+        <li>Possibilité de désactiver totalement l'envoi de logs depuis les paramètres de l'application</li>
+        <li>Packages de mise à jour signés numériquement, intégrité vérifiée avant installation</li>
+      </ul>
+    </section>
+
+    <!-- 6 -->
+    <section id="s6">
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <h2>Partage avec des tiers</h2>
+      </div>
+      <p>Relay ne vend, ne loue ni ne cède vos données personnelles à des tiers à des fins commerciales. Des données peuvent être partagées uniquement dans les cas suivants :</p>
+
+      <table>
+        <thead>
+          <tr><th>Tiers</th><th>Données partagées</th><th>Raison</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Anthropic / OpenAI</strong> (LLM)</td>
+            <td>Texte soumis pour génération IA</td>
+            <td>Fourniture du module IA Premium — via proxy sécurisé Relay</td>
+          </tr>
+          <tr>
+            <td><strong>Prestataire de paiement</strong> (ex. Stripe, Paddle)</td>
+            <td>Données de paiement, e-mail</td>
+            <td>Traitement des transactions — certifié PCI-DSS</td>
+          </tr>
+          <tr>
+            <td><strong>Hébergeur cloud</strong></td>
+            <td>Données de licence (chiffrées)</td>
+            <td>Infrastructure du backend Relay</td>
+          </tr>
+          <tr>
+            <td><strong>Autorités légales</strong></td>
+            <td>Données requises par réquisition judiciaire</td>
+            <td>Obligation légale</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Plateformes sociales :</strong> Vos publications sont transmises directement depuis votre appareil aux APIs des plateformes (Meta, LinkedIn, X, TikTok) via vos propres tokens OAuth. Relay n'est pas intermédiaire de ces données de contenu.
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section id="s7">
+      <div class="section-header">
+        <span class="section-number">07</span>
+        <h2>Transferts de données</h2>
+      </div>
+      <p>Dans le cadre du module IA, les textes soumis transitent par notre backend avant d'être transmis à des fournisseurs LLM (Anthropic, OpenAI).</p>
+      <p>Ces transferts sont encadrés par :</p>
+      <ul>
+        <li>Les clauses contractuelles types applicables</li>
+        <li>Les certifications et garanties des sous-traitants (DPA signés)</li>
+        <li>Les mécanismes de minimisation des données (seul le texte nécessaire est transmis, sans identifiant personnel direct)</li>
+      </ul>
+    </section>
+
+    <!-- 8 -->
+    <section id="s8">
+      <div class="section-header">
+        <span class="section-number">08</span>
+        <h2>Durée de conservation</h2>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Catégorie de données</th><th>Durée de conservation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Données de licence</td><td>Durée de validité de la licence + 5 ans (obligations comptables)</td></tr>
+          <tr><td>Données de paiement</td><td>Gérées par le prestataire de paiement (10 ans maximum)</td></tr>
+          <tr><td>Logs d'erreurs (anonymisés)</td><td>90 jours glissants</td></tr>
+          <tr><td>Données de support (e-mail)</td><td>3 ans à compter de la clôture du ticket</td></tr>
+          <tr><td>Requêtes IA</td><td>Non conservées côté serveur après traitement</td></tr>
+          <tr><td>Données locales (sur votre appareil)</td><td>Indéfiniment jusqu'à désinstallation ou suppression manuelle</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 9 -->
+    <section id="s9">
+      <div class="section-header">
+        <span class="section-number">09</span>
+        <h2>Vos droits</h2>
+      </div>
+      <p>Conformément aux législations applicables en matière de protection des données, vous disposez des droits suivants :</p>
+      <table>
+        <thead>
+          <tr><th>Droit</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Accès</strong></td><td>Obtenir la confirmation du traitement et une copie de vos données</td></tr>
+          <tr><td><strong>Rectification</strong></td><td>Faire corriger des données inexactes ou incomplètes</td></tr>
+          <tr><td><strong>Effacement</strong></td><td>Demander la suppression de vos données (« droit à l'oubli »)</td></tr>
+          <tr><td><strong>Limitation</strong></td><td>Obtenir la suspension temporaire du traitement</td></tr>
+          <tr><td><strong>Portabilité</strong></td><td>Recevoir vos données dans un format structuré et lisible</td></tr>
+          <tr><td><strong>Opposition</strong></td><td>Vous opposer au traitement basé sur l'intérêt légitime</td></tr>
+          <tr><td><strong>Retrait du consentement</strong></td><td>Retirer à tout moment un consentement préalablement donné</td></tr>
+        </tbody>
+      </table>
+      <p>Pour exercer vos droits : <strong>envoyez un e-mail à <a href="mailto:ginlogossou@gmail.com">ginlogossou@gmail.com</a></strong> avec la copie d'un justificatif d'identité. Réponse sous 30 jours.</p>
+      <p>Vous pouvez également exporter et supprimer vos données locales directement depuis <strong>Paramètres → Gestion des données</strong> dans l'application.</p>
+      <p>En cas de litige non résolu, vous pouvez introduire une réclamation auprès de l'autorité de contrôle compétente de votre pays.</p>
+    </section>
+
+    <!-- 10 -->
+    <section id="s10">
+      <div class="section-header">
+        <span class="section-number">10</span>
+        <h2>Cookies et traceurs</h2>
+      </div>
+      <p>L'application Relay (Windows Desktop) <strong>n'utilise pas de cookies</strong>.</p>
+      <p>En ce qui concerne le site web de présentation de Relay, les cookies utilisés se limitent à :</p>
+      <ul>
+        <li><strong>Cookies strictement nécessaires :</strong> gestion de session, préférences de langue — aucun consentement requis.</li>
+        <li><strong>Cookies analytiques :</strong> uniquement avec votre consentement explicite, collecte anonymisée (aucun identifiant croisé avec des tiers).</li>
+      </ul>
+      <p>Aucun cookie publicitaire ou de tracking tiers n'est utilisé sur nos supports.</p>
+    </section>
+
+    <!-- 11 -->
+    <section id="s11">
+      <div class="section-header">
+        <span class="section-number">11</span>
+        <h2>Modifications de la politique</h2>
+      </div>
+      <p>Nous nous réservons le droit de modifier la présente politique à tout moment. En cas de modification substantielle, vous serez informé(e) :</p>
+      <ul>
+        <li>Par une notification dans l'application Relay au prochain démarrage</li>
+        <li>Par e-mail si vous avez fourni votre adresse dans le cadre de votre licence</li>
+      </ul>
+      <p>La date de dernière mise à jour est indiquée en bas de ce document. L'utilisation continue de l'application après notification vaut acceptation des modifications.</p>
+    </section>
+
+    <!-- 12 -->
+    <section id="s12">
+      <div class="section-header">
+        <span class="section-number">12</span>
+        <h2>Contact — Protection des Données</h2>
+      </div>
+      <div class="contact-box">
+        <p><strong>Pour toute question relative à la protection de vos données :</strong></p>
+        <p>E-mail : <a href="mailto:ginlogossou@gmail.com">ginlogossou@gmail.com</a></p>
+        <p style="margin-top:0.75rem; font-size:0.82rem; opacity:0.7;">Nous nous engageons à répondre dans un délai maximum de <strong>30 jours calendaires</strong>.</p>
+      </div>
+    </section>
+
+    <div class="signature-block">
+      <div class="sig-item">
+        <strong>Document</strong>
+        Politique de Confidentialité — Relay
+      </div>
+      <div class="sig-item">
+        <strong>Version</strong>
+        1.0 — Initial
+      </div>
+      <div class="sig-item">
+        <strong>Date d'entrée en vigueur</strong>
+        Mai 2026
+      </div>
+      <div class="sig-item">
+        <strong>Dernière mise à jour</strong>
+        Mai 2026
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <p>&copy; 2026 Relay — Application de gestion des réseaux sociaux &nbsp;·&nbsp;
+  <a href="confidentialite.html">Confidentialité</a> &nbsp;·&nbsp;
+  <a href="cgu.html">CGU</a> &nbsp;·&nbsp;
+  <a href="index.html">Accueil</a></p>
+</footer>
+
+</body>
+</html>
